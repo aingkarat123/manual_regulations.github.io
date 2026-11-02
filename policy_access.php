@@ -11,17 +11,8 @@ if (!headers_sent()) {
 
 function policyAccessGranted(): bool
 {
-    if (isset($_SESSION['User_name'])) {
-        return true;
-    }
-
-    $startedAt = (int) ($_SESSION['policy_guest_started_at'] ?? 0);
-    if (!empty($_SESSION['policy_guest']) && $startedAt > 0 && $startedAt >= (time() - POLICY_GUEST_SESSION_TTL)) {
-        return true;
-    }
-
-    unset($_SESSION['policy_guest'], $_SESSION['policy_guest_started_at']);
-    return false;
+    // ศูนย์รวมคู่มือเป็นข้อมูลสำหรับอ่าน จึงเปิดให้เข้าถึงได้โดยไม่ต้องล็อกอิน
+    return true;
 }
 
 function policyGuestAccess(): bool
